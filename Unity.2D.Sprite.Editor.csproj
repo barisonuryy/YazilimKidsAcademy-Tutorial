@@ -57,8 +57,8 @@
     <Compile Include="Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca\Editor\SpriteEditorModule\SpriteFrameModule\Overlay\SpriteFrameModeOverlay.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca\Editor\Interface\IAssetDatabase.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca\Editor\SpriteEditorModule\SpriteFrameModule\DefaultSpriteNameFileIdDataProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca\Editor\SpriteEditor\SpriteEditorWindowSettings.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca\Editor\Interface\ITexture.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca\Editor\SpriteEditor\SpriteEditorWindowSettings.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca\Editor\Interface\IHandles.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca\Editor\SpriteEditorModule\SpriteFrameModule\SpriteFrameModuleBaseView.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca\Editor\SpriteEditorModule\SpriteSecondaryTexturesModule.cs" />

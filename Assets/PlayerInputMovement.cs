@@ -25,11 +25,12 @@ public class PlayerInputMovement : MonoBehaviour
     {
         if (!value.isPressed) return; // sadece basıldığı an
 
-        Instantiate(
+        GameObject bulletGO=Instantiate(
             bullet,
             bulletSpawnPoint.position,
             bulletSpawnPoint.rotation
         );
+        bulletGO.GetComponent<BulletMovement>().SetDirection(new Vector2(1,0));
     }
 
     private void FixedUpdate()
