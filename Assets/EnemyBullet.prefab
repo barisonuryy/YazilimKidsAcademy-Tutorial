@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4564329681376055553}
   m_Layer: 0
   m_Name: EnemyBullet
-  m_TagString: Untagged
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,4 +181,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BulletMovement
   speed: 7
   lifetime: 3
+  rotateToVelocity: 1
   damage: 25

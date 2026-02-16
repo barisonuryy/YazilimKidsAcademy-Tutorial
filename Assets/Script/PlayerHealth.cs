@@ -34,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
     void OnDestroy()
     {
         FindAnyObjectByType<UIManager>().SetState("KAYBETTİN!");
+        FindAnyObjectByType<UIManager>().SetRestart();
         isDead=true;
     }
 }

@@ -54,18 +54,20 @@ public class BulletMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("EnemyTower"))
+        if (collision.CompareTag("EnemyTower")&&!gameObject.CompareTag("EnemyBullet"))
         {
             EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
             if (enemyHealth != null) enemyHealth.TakeDamage(damage);
+            Destroy(gameObject);
             return;
         }
 
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player")&&!gameObject.CompareTag("PlayerBullet"))
         {
           Debug.Log("Player bulundu");
             PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
             if (playerHealth != null) playerHealth.TakeDamage(damage);
+            Destroy(gameObject);
             return;
         }
     }
