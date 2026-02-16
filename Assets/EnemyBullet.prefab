@@ -182,4 +182,4 @@ MonoBehaviour:
   speed: 7
   lifetime: 3
   rotateToVelocity: 1
-  damage: 25
+  damage: 50

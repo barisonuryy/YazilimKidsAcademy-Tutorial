@@ -7,6 +7,8 @@ public class PlayerHealth : MonoBehaviour
     public float startHealth=150;
     private float currentHealth;
 
+    public int generalHealth=3;
+
     public Image healthBar;
 
     private bool isDead;
@@ -28,7 +30,12 @@ public class PlayerHealth : MonoBehaviour
         SetHealthBar();
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            generalHealth--;
+            FindAnyObjectByType<UIManager>().SetHealths(generalHealth);
+            if (generalHealth <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
     void OnDestroy()
