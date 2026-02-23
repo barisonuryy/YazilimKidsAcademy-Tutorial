@@ -8,17 +8,40 @@ public class PlayerInputMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
+    public GameObject blackSmoke;
+
+    private SpriteRenderer spriteRenderer;
+
     public GameObject bullet;
     public Transform bulletSpawnPoint;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer=GetComponent<SpriteRenderer>();
     }
 
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+        SetFlip(moveInput.x);
+    }
+    private void SetFlip(float input)
+    {
+        blackSmoke.SetActive(true);
+        if (input > 0)
+        {
+            spriteRenderer.flipX=false;
+            
+        }
+        else if (input < 0)
+        {
+            spriteRenderer.flipX=true;
+        }
+        else
+        {
+            blackSmoke.SetActive(false);
+        }
     }
 
     public void OnAttack(InputValue value)

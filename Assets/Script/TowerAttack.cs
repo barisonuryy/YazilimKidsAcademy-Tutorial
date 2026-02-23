@@ -22,7 +22,7 @@ public class TowerAttack : MonoBehaviour
         }
         else
         {
-           GameObject bulletGameobject= Instantiate(bullet,transform);
+           GameObject bulletGameobject= Instantiate(bullet,transform.position,Quaternion.identity);
            bulletGameobject.transform.Rotate(0,0,45);
            bulletGameobject.GetComponent<BulletMovement>().SetDirection(new Vector2(-1,-0.05f));
            currentCooldown=0f;
