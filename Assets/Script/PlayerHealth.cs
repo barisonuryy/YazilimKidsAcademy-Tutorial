@@ -27,16 +27,24 @@ public class PlayerHealth : MonoBehaviour
     {
         if(isDead) return;
         currentHealth=currentHealth-damage;
+        Debug.Log("Current Health"+currentHealth);
         SetHealthBar();
         if (currentHealth <= 0)
         {
             generalHealth--;
+            RefreshHealth();
             FindAnyObjectByType<UIManager>().SetHealths(generalHealth);
             if (generalHealth <= 0)
             {
                 Destroy(gameObject);
-            }
+            } 
         }
+    }
+
+    public void RefreshHealth()
+    {
+        currentHealth=startHealth;
+        SetHealthBar();
     }
     void OnDestroy()
     {

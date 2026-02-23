@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button restartButton;
 
     [SerializeField] private Image[] healths;
-    [SerializeField] private Image health;
+
   
     public void SetState(string state)
     {
@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     {
         for(int i = 0; i < healths.Length; i++)
         {
-            bool isActive=i<=currentHealth;
+            bool isActive=i<currentHealth;
             healths[i].gameObject.SetActive(isActive);
         }
     }
