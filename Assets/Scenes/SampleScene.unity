@@ -1618,7 +1618,7 @@ GameObject:
   - component: {fileID: 1367678721}
   - component: {fileID: 1367678720}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1658,7 +1658,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 4.511728, y: 0}
+  m_Offset: {x: 9.6975975, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1668,7 +1668,7 @@ BoxCollider2D:
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 12.747169, y: 1.21}
+  m_Size: {x: 40.734352, y: 1.21}
   m_EdgeRadius: 0
 --- !u!212 &1367678721
 SpriteRenderer:
@@ -2038,7 +2038,6 @@ MonoBehaviour:
   - {fileID: 407135428}
   - {fileID: 1760481202}
   - {fileID: 481077901}
-  health: {fileID: 0}
 --- !u!1 &1625577696
 GameObject:
   m_ObjectHideFlags: 0
