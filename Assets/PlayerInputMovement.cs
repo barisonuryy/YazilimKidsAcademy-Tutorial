@@ -14,21 +14,33 @@ public class PlayerInputMovement : MonoBehaviour
 
     public GameObject bullet;
     public Transform bulletSpawnPoint;
+    private Transform blackSmokeTransform;
+
+    private Animator animator;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer=GetComponent<SpriteRenderer>();
+        animator=GetComponent<Animator>();
     }
 
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
         SetFlip(moveInput.x);
+        bool isWalked=moveInput.x>0||moveInput.x<0;
+        Debug.Log("isWalked"+isWalked);
+        if (animator != null)
+        {
+            Debug.Log("animator boş değil");
+            animator.SetBool("speed",isWalked);
+        }
+        
     }
     private void SetFlip(float input)
     {
-        blackSmoke.SetActive(true);
+//        blackSmoke.SetActive(true);
         if (input > 0)
         {
             spriteRenderer.flipX=false;
@@ -40,7 +52,7 @@ public class PlayerInputMovement : MonoBehaviour
         }
         else
         {
-            blackSmoke.SetActive(false);
+            //blackSmoke.SetActive(false);
         }
     }
 
