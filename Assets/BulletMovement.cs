@@ -13,7 +13,6 @@ public class BulletMovement : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    // Uçuş yönü (normalize tutulacak)
     private Vector2 moveDir = Vector2.right;
 
     private void Awake()
@@ -26,17 +25,13 @@ public class BulletMovement : MonoBehaviour
         Destroy(gameObject, lifetime);
     }
 
-    /// <summary>
-    /// Bullet'i hedef/yöne göre ateşlemek için çağır.
-    /// </summary>
     public void SetDirection(Vector2 dir)
     {
-        if (dir.sqrMagnitude < 0.0001f)
+        if (dir == Vector2.zero)
             dir = Vector2.right;
 
         moveDir = dir.normalized;
 
-        // İstersen mermiyi anında yönüne döndür
         if (rotateToVelocity)
         {
             float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
@@ -46,15 +41,12 @@ public class BulletMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Unity sürümüne göre velocity/linearVelocity farkı olabilir.
-        // Sende Rigidbody2D.linearVelocity çalışıyorsa onu bırakabilirsin.
         rb.linearVelocity = moveDir * speed;
-        // rb.linearVelocity = moveDir * speed; // Unity 6+ kullanıyorsan bunu da kullanabilirsin.
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("EnemyTower")&&!gameObject.CompareTag("EnemyBullet"))
+        if (collision.CompareTag("EnemyTower") && !gameObject.CompareTag("EnemyBullet"))
         {
             EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
             if (enemyHealth != null) enemyHealth.TakeDamage(damage);
@@ -62,9 +54,9 @@ public class BulletMovement : MonoBehaviour
             return;
         }
 
-        if (collision.CompareTag("Player")&&!gameObject.CompareTag("PlayerBullet"))
+        if (collision.CompareTag("Player") && !gameObject.CompareTag("PlayerBullet"))
         {
-          Debug.Log("Player bulundu");
+            Debug.Log("Player bulundu");
             PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
             if (playerHealth != null) playerHealth.TakeDamage(damage);
             Destroy(gameObject);

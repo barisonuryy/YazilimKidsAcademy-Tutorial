@@ -18,54 +18,74 @@ public class PlayerInputMovement : MonoBehaviour
 
     private Animator animator;
 
+    public AnimationClip attackAnim;
+
+    // Karakterin baktığı yön
+    private Vector2 lookDirection = Vector2.right;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer=GetComponent<SpriteRenderer>();
-        animator=GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+
         SetFlip(moveInput.x);
-        bool isWalked=moveInput.x>0||moveInput.x<0;
-        Debug.Log("isWalked"+isWalked);
+
+        bool isWalked = moveInput.x > 0 || moveInput.x < 0;
+        Debug.Log("isWalked " + isWalked);
+
         if (animator != null)
         {
             Debug.Log("animator boş değil");
-            animator.SetBool("speed",isWalked);
+            animator.SetBool("speed", isWalked);
         }
-        
     }
+
     private void SetFlip(float input)
     {
-//        blackSmoke.SetActive(true);
         if (input > 0)
         {
-            spriteRenderer.flipX=false;
-            
+            spriteRenderer.flipX = false;
+            lookDirection = Vector2.right;
         }
         else if (input < 0)
         {
-            spriteRenderer.flipX=true;
-        }
-        else
-        {
-            //blackSmoke.SetActive(false);
+            spriteRenderer.flipX = true;
+            lookDirection = Vector2.left;
         }
     }
 
     public void OnAttack(InputValue value)
     {
-        if (!value.isPressed) return; // sadece basıldığı an
+        if (!value.isPressed)
+        {
+            return;
+        }
 
-        GameObject bulletGO=Instantiate(
+        GameObject bulletGO = Instantiate(
             bullet,
             bulletSpawnPoint.position,
-            bulletSpawnPoint.rotation
+            Quaternion.identity
         );
-        bulletGO.GetComponent<BulletMovement>().SetDirection(new Vector2(1,0));
+
+        animator.SetBool("isAttack", true);
+        Invoke(nameof(ResetAttack), attackAnim.length);
+
+        BulletMovement bulletMovement = bulletGO.GetComponent<BulletMovement>();
+        if (bulletMovement != null)
+        {
+            bulletMovement.SetDirection(lookDirection);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        animator.SetBool("isAttack", false);
     }
 
     private void FixedUpdate()
