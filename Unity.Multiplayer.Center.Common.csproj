@@ -49,11 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.multiplayer.center@f01f4ba8d00a\Common\IOnboardingSectionAnalyticsProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.center@f01f4ba8d00a\Common\AnswerData.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.center@f01f4ba8d00a\Common\SelectedSolutionsData.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.center@f01f4ba8d00a\Common\IOnboardingSection.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.center@f01f4ba8d00a\Common\Preset.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.center@f01f4ba8d00a\Common\AnswerData.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.center@f01f4ba8d00a\Common\StyleConstants.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.center@f01f4ba8d00a\Common\SelectedSolutionsData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.multiplayer.center@f01f4ba8d00a\Common\Unity.Multiplayer.Center.Common.asmdef" />

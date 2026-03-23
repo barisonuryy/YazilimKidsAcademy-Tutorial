@@ -49,22 +49,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Culling\CullingManager.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\IKUtility.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Solvers\CCD2D.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\LimbSolver2D.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Solver2DMenuAttribute.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\FabrikSolver2D.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Solvers\Limb.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\IconUtility.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Culling\SpriteSkinVisibilityCullingStrategy.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\IKManager2DEditorData.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Solvers\FABRIK2D.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Culling\BaseCullingStrategy.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Solver2D.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\IKManager2D.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\IKMathUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\IKChain2D.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Culling\CullingManager.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Solvers\CCD2D.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\FabrikSolver2D.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Culling\SpriteSkinVisibilityCullingStrategy.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Solvers\FABRIK2D.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Solver2D.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\CCDSolver2D.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@3c53dae92956\IK\Runtime\Culling\AlwaysUpdateCullingStrategy.cs" />
   </ItemGroup>

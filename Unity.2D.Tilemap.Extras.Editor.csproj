@@ -49,28 +49,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Brushes\LineBrush\LineBrush.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\RuleOverrideTile\AdvancedRuleOverrideTileEditor.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\RuleTile\RuleTileTemplateUtility.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\AutoTile\UI\AutoTileEditorElement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\AutoTile\UI\AutoTileTextureSource.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\AutoTile\AutoTileEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\HexagonalRuleTile\HexagonalRuleTileEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\RuleTile\RuleTileTemplate.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\RuleOverrideTile\AdvancedRuleOverrideTileEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\RuleTile\RuleTileEditor.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\RuleTile\RuleTileTemplateUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\AutoTile\UI\AutoTileSpriteSource.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Brushes\RandomBrush\RandomBrush.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\AutoTile\UI\AutoTileEditorElement.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Menu\CustomRuleTileMenu.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\AutoTile\AutoTileTemplate.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\RuleOverrideTile\PopulateRuleOverrideTileWizard.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\AutoTile\UI\AutoTileTextureSource.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\AutoTile\UI\AutoTileTextureImporterElement.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\AutoTile\AutoTileTemplateUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Brushes\GameObjectBrush\GameObjectBrush.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\IsometricRuleTile\IsometricRuleTileEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\RuleOverrideTile\RuleOverrideTileEditor.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\AnimatedTile\AnimatedTileEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Brushes\GroupBrush\GroupBrush.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Menu\MenuItemOrder.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Tiles\AutoTile\AutoTileEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.2d.tilemap.extras@3dde84bf3867\Editor\Unity.2D.Tilemap.Extras.Editor.asmdef" />
