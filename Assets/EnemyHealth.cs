@@ -10,6 +10,8 @@ public class EnemyHealth : MonoBehaviour
     public Image healthBar;
 
     private bool isDead;
+
+    public PlayerDissolve playerDisslv;
     void Start()
     {
         currentHealth=startHealth;
@@ -28,12 +30,17 @@ public class EnemyHealth : MonoBehaviour
         SetHealthBar();
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            Debug.Log("Son Cana ulaşıldı");
+            if(playerDisslv!=null) StartCoroutine(playerDisslv.PlayDissolve());
         }
     }
-    void OnDestroy()
+    void ondisa()
     {
-        FindAnyObjectByType<UIManager>().SetState("KAZANDIN!");
-        isDead=true;
+       
+       // isDead=true;
+    }
+     void OnDisable()
+    {
+         FindAnyObjectByType<UIManager>().SetState("KAZANDIN!");
     }
 }

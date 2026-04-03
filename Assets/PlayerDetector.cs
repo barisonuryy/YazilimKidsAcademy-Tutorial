@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 public class PlayerDetector : MonoBehaviour
 {
     [Header("Rotation Settings")]
-    [SerializeField] private float[] rotationAngles = { -45f, 0f, 45f, 0f };
-    [SerializeField] private float rotationSpeed = 180f;
-    [SerializeField] private float waitAtAngle = 0.8f;
+    [SerializeField] private float leftAngle = -45f;
+    [SerializeField] private float rightAngle = 45f;
+    [SerializeField] private float rotationSpeed = 90f;
 
     [Header("Ray Settings")]
     [SerializeField] private Transform rayOrigin;
@@ -19,60 +19,77 @@ public class PlayerDetector : MonoBehaviour
     [SerializeField] private string boxTag = "Box";
 
     [Header("Shoot / Restart")]
-    [SerializeField] private float restartDelay = 1f;
+    [SerializeField] private float restartDelay = 0.25f;
+    [SerializeField] private bool restartSceneAfterDissolve = true;
 
     [Header("Gizmo Settings")]
-    [SerializeField] private bool drawAllAngles = true;
-    [SerializeField] private bool drawCurrentAngle = true;
+    [SerializeField] private bool drawCenterRay = true;
     [SerializeField] private float gizmoSphereRadius = 0.08f;
 
-    private int currentAngleIndex = 0;
     private bool playerDetected = false;
+    private bool rotationLocked = false;
+    private float currentTargetAngle;
+    private Coroutine sweepRoutine;
 
     private void Start()
     {
         if (rayOrigin == null)
             rayOrigin = transform;
 
-        StartCoroutine(RotateAndDetectRoutine());
+        rayDistance = Mathf.Abs(rayDistance);
+        currentTargetAngle = rightAngle;
+
+        transform.rotation = Quaternion.Euler(0f, 0f, leftAngle);
+
+        sweepRoutine = StartCoroutine(SweepRoutine());
     }
 
-    private IEnumerator RotateAndDetectRoutine()
+    private IEnumerator SweepRoutine()
     {
-        while (!playerDetected)
+        while (!playerDetected && !rotationLocked)
         {
-            float targetAngle = rotationAngles[currentAngleIndex];
+            yield return RotateTowardsTarget(currentTargetAngle);
 
-            while (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle)) > 0.1f)
-            {
-                float newAngle = Mathf.MoveTowardsAngle(
-                    transform.eulerAngles.z,
-                    targetAngle,
-                    rotationSpeed * Time.deltaTime
-                );
-
-                transform.rotation = Quaternion.Euler(0f, 0f, newAngle);
-                yield return null;
-            }
-
-            transform.rotation = Quaternion.Euler(0f, 0f, targetAngle);
-
-            yield return new WaitForSeconds(waitAtAngle);
-
-            DetectTarget();
-
-            if (playerDetected)
+            if (playerDetected || rotationLocked)
                 yield break;
 
-            currentAngleIndex++;
-            if (currentAngleIndex >= rotationAngles.Length)
-                currentAngleIndex = 0;
+            currentTargetAngle = Mathf.Approximately(currentTargetAngle, rightAngle)
+                ? leftAngle
+                : rightAngle;
         }
     }
 
-    private void DetectTarget()
+    private IEnumerator RotateTowardsTarget(float targetAngle)
     {
-        Vector2 direction = rayOrigin.right;
+        while (!playerDetected && !rotationLocked &&
+               Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle)) > 0.1f)
+        {
+            float newAngle = Mathf.MoveTowardsAngle(
+                transform.eulerAngles.z,
+                targetAngle,
+                rotationSpeed * Time.deltaTime
+            );
+
+            transform.rotation = Quaternion.Euler(0f, 0f, newAngle);
+
+            DetectTargetFromOriginDirection();
+
+            yield return null;
+        }
+
+        if (!rotationLocked)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, targetAngle);
+            DetectTargetFromOriginDirection();
+        }
+    }
+
+    private void DetectTargetFromOriginDirection()
+    {
+        if (playerDetected || rotationLocked)
+            return;
+
+        Vector2 direction = (-rayOrigin.up).normalized;
 
         RaycastHit2D hit = Physics2D.Raycast(
             rayOrigin.position,
@@ -81,45 +98,73 @@ public class PlayerDetector : MonoBehaviour
             detectionMask
         );
 
-        if (hit.collider != null)
-        {
-            Debug.DrawRay(rayOrigin.position, direction * rayDistance, Color.red, 1f);
+        Debug.DrawRay(
+            rayOrigin.position,
+            direction * rayDistance,
+            hit.collider != null ? Color.red : Color.green,
+            0.02f
+        );
 
-            if (hit.collider.CompareTag(playerTag))
-            {
-                Debug.Log("Oyuncu tespit edildi, ateş ediliyor!");
-                FireAtPlayer(hit.collider.transform);
-            }
-            else if (hit.collider.CompareTag(boxTag))
-            {
-                Debug.Log("Kutu tespit edildi, rotasyon devam ediyor.");
-            }
-            else
-            {
-                Debug.Log("Başka bir nesne tespit edildi: " + hit.collider.name);
-            }
-        }
-        else
+        if (hit.collider == null)
+            return;
+
+        Debug.Log(
+            "Hit successful: " + hit.collider.name +
+            " | Tag: " + hit.collider.tag +
+            " | Layer: " + LayerMask.LayerToName(hit.collider.gameObject.layer)
+        );
+
+        if (hit.collider.CompareTag(playerTag))
         {
-            Debug.DrawRay(rayOrigin.position, direction * rayDistance, Color.green, 1f);
-            Debug.Log("Hiçbir şey tespit edilmedi.");
+            Debug.Log("Oyuncu tespit edildi, ateş ediliyor!");
+            FireAtPlayer(hit.collider.transform);
+        }
+        else if (hit.collider.CompareTag(boxTag))
+        {
+            Debug.Log("Kutu tespit edildi, dönüş devam ediyor.");
         }
     }
 
     private void FireAtPlayer(Transform player)
     {
+        if (playerDetected)
+            return;
+
         playerDetected = true;
+        rotationLocked = true;
 
-        // Buraya ateş animasyonu / mermi / efekt ekleyebilirsin
-        Debug.Log("ATEŞ!");
+        if (sweepRoutine != null)
+        {
+            StopCoroutine(sweepRoutine);
+            sweepRoutine = null;
+        }
 
-        StartCoroutine(RestartSceneRoutine());
+        Debug.Log("ATEŞ! " + player.name);
+        StartCoroutine(HandlePlayerCaught(player));
     }
 
-    private IEnumerator RestartSceneRoutine()
+    private IEnumerator HandlePlayerCaught(Transform player)
     {
-        yield return new WaitForSeconds(restartDelay);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        PlayerDissolve dissolve = player.GetComponent<PlayerDissolve>();
+
+        if (dissolve == null)
+            dissolve = player.GetComponentInChildren<PlayerDissolve>();
+
+        if (dissolve != null)
+        {
+            dissolve.ResetDissolve();
+            yield return StartCoroutine(dissolve.PlayDissolve());
+        }
+        else
+        {
+            Debug.LogWarning("PlayerDissolve componenti player üzerinde bulunamadı.", player);
+        }
+
+        if (restartDelay > 0f)
+            yield return new WaitForSeconds(restartDelay);
+
+        if (restartSceneAfterDissolve)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnDrawGizmos()
@@ -135,39 +180,18 @@ public class PlayerDetector : MonoBehaviour
     private void DrawDetectionGizmos()
     {
         Transform origin = rayOrigin != null ? rayOrigin : transform;
-        if (origin == null) return;
+        if (origin == null || !drawCenterRay)
+            return;
 
+        float safeDistance = Mathf.Abs(rayDistance);
         Vector3 startPos = origin.position;
+        Vector3 dir = (-origin.up).normalized;
 
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(startPos, gizmoSphereRadius);
 
-        if (drawAllAngles && rotationAngles != null && rotationAngles.Length > 0)
-        {
-            Gizmos.color = new Color(1f, 1f, 0f, 0.7f);
-
-            for (int i = 0; i < rotationAngles.Length; i++)
-            {
-                Vector3 dir = GetDirectionFromAngle(rotationAngles[i]);
-                Gizmos.DrawLine(startPos, startPos + dir * rayDistance);
-                Gizmos.DrawWireSphere(startPos + dir * rayDistance, gizmoSphereRadius * 0.75f);
-            }
-        }
-
-        if (drawCurrentAngle && rotationAngles != null && rotationAngles.Length > 0)
-        {
-            int safeIndex = Mathf.Clamp(currentAngleIndex, 0, rotationAngles.Length - 1);
-
-            Gizmos.color = Color.cyan;
-            Vector3 currentDir = GetDirectionFromAngle(rotationAngles[safeIndex]);
-            Gizmos.DrawLine(startPos, startPos + currentDir * rayDistance);
-            Gizmos.DrawWireSphere(startPos + currentDir * rayDistance, gizmoSphereRadius);
-        }
-    }
-
-    private Vector3 GetDirectionFromAngle(float angle)
-    {
-        float radians = angle * Mathf.Deg2Rad;
-        return new Vector3(Mathf.Sin(radians), Mathf.Cos(radians), 0f).normalized;
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(startPos, startPos + dir * safeDistance);
+        Gizmos.DrawWireSphere(startPos + dir * safeDistance, gizmoSphereRadius);
     }
 }

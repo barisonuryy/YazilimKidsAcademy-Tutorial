@@ -56,7 +56,7 @@ public class BulletMovement : MonoBehaviour
 
         if (collision.CompareTag("Player") && !gameObject.CompareTag("PlayerBullet"))
         {
-            Debug.Log("Player bulundu");
+           // Debug.Log("Player bulundu");
             PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
             if (playerHealth != null) playerHealth.TakeDamage(damage);
             Destroy(gameObject);

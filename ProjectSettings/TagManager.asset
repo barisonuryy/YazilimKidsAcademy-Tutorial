@@ -10,6 +10,7 @@ TagManager:
   - PlayerBullet
   - EnemyBullet
   - Box
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - UI
   - Player
   - MainPlayer
-  - 
+  - Ground
   - 
   - 
   - 
